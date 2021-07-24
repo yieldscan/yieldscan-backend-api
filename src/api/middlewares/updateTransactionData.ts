@@ -7,7 +7,17 @@ const updateTransactionData = async (req, res, next) => {
   try {
     const data = req.body;
     console.log(data);
-    const { stashId, network, alreadyBonded, stake, transactionHash, successful } = data;
+    const { 
+      stashId, 
+      network, 
+      alreadyBonded, 
+      stake, 
+      collectionAddress,
+			commissionRatio, 
+			yieldscanCommission,
+      transactionHash, 
+      successful 
+    } = data;
 
     const TransactionData = Container.get(network + 'TransactionData') as mongoose.Model<
       ITransactionData & mongoose.Document
@@ -19,13 +29,16 @@ const updateTransactionData = async (req, res, next) => {
         network: network,
         alreadyBonded: alreadyBonded,
         stake: stake,
+        collectionAddress: collectionAddress,
+			  commissionRatio: commissionRatio, 
+			  yieldscanCommission: yieldscanCommission,
         transactionHash: transactionHash,
         successful: successful,
       },
     ]);
     return res.status(200).json({ status: 200, message: 'transaction info updated' });
   } catch (e) {
-    Logger.error('🔥 Error while saving trnasaction data: %o', e);
+    Logger.error('🔥 Error while saving transaction data: %o', e);
     return next(e);
   }
 };

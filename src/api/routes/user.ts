@@ -11,7 +11,6 @@ const corsOptions = { origin: config.domain.level };
 export default (app: Router): void => {
   // Register our endpoint for this route-apis
   app.use('/:network/user', route);
-
   route.get('/:id', middlewares.userData);
   route.put(
     '/transaction/update',
@@ -22,6 +21,9 @@ export default (app: Router): void => {
         network: Joi.string(),
         alreadyBonded: Joi.number(),
         stake: Joi.number(),
+        collectionAddress: Joi.string(),
+			  commissionRatio: Joi.number(), 
+			  yieldscanCommission: Joi.number(),
         transactionHash: Joi.string(),
         successful: Joi.boolean(),
       }),

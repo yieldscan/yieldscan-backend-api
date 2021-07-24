@@ -26,11 +26,25 @@ const transactionsData = async (req, res, next) => {
 
     const result = sortedData
       .filter((x) => !isNil(x.transactionHash))
-      .map(({ stashId, network, alreadyBonded, stake, transactionHash, successful, createdAt }) => ({
+      .map(({
         stashId,
         network,
         alreadyBonded,
         stake,
+        collectionAddress,
+			  commissionRatio, 
+			  yieldscanCommission,
+        transactionHash,
+        successful,
+        createdAt,
+      }) => ({
+        stashId,
+        network,
+        alreadyBonded,
+        stake,
+        collectionAddress,
+			  commissionRatio, 
+			  yieldscanCommission,
         transactionHash,
         successful,
         createdAt,
