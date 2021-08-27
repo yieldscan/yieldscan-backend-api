@@ -25,6 +25,15 @@ Important packages:
 - [src/interfaces](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/interfaces): Interfaces for the models.
 - [src/api](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/api): Here we define different middlewares and routes for different endpoints.
 
+Api Endpoints:
+
+- Validators risk-set: `/api/<network>/rewards/risk-set`
+- Nominators: `/api/<network>/actors/nominators`
+- Validator profile: `/api/<network>/validator/<validatorStashId>`
+- Historic rewards for a nominator: `/<network>/actors/nominator/overall_history?id=<address>&activeEra=<activeEra>`
+- Council Members:`api/<network>/council/members`
+- Council Member data: `api/<network>/council/member/<councilMemberAccountId>`
+
 ### Development Guide:
 
 #### Pre-requisite:
