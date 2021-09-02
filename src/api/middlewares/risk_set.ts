@@ -19,7 +19,7 @@ const risk_set = async (req, res, next) => {
 
     const sortedData = await Validators.aggregate([
       {
-        $match: { $and: [{ isElected: true }, { isNextElected: true }] },
+        $match: { $and: [{ isElected: true }, { isNextElected: true }, { blocked: false }] },
       },
       // {
       //   $match: { isNextElected: true },

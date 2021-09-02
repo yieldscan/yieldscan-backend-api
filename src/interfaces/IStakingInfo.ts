@@ -8,6 +8,7 @@ export interface IStakingInfo {
   controllerId: string;
   accountId: string;
   commission: number;
+  blocked: boolean;
   totalStake: number;
   oversubscribed: boolean;
   ownStake: number;

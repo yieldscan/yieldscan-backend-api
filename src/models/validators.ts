@@ -9,6 +9,7 @@ const Validators = new mongoose.Schema(
     activeErasCount: Number,
     totalSlashCount: Number,
     commission: Number,
+    blocked: Boolean,
     totalStake: Number,
     ownStake: Number,
     oversubscribed: Boolean,
