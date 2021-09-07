@@ -50,7 +50,7 @@ const waitingDashboard = async (req, res, next) => {
       x.othersStake = x.totalStake - x.ownStake;
       x.numOfNominators = x.nominators.length;
       x.estimatedPoolReward = x.estimatedPoolReward / Math.pow(10, networkDetails.decimalPlaces);
-      x.name = x.info[0] !== undefined ? x.info[0].display : null;
+      x.info = x.info[0] !== undefined ? x.info[0] : null;
     });
 
     const result = sortedData.map(
@@ -64,7 +64,7 @@ const waitingDashboard = async (req, res, next) => {
         numOfNominators,
         rewardsPer100KSM,
         riskScore,
-        name,
+        info,
       }) => ({
         stashId,
         commission,
@@ -75,7 +75,7 @@ const waitingDashboard = async (req, res, next) => {
         numOfNominators,
         rewardsPer100KSM,
         riskScore,
-        name,
+        info,
       }),
     );
 

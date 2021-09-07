@@ -47,14 +47,14 @@ const userData = async (req, res, next) => {
       throw new HttpError(404, 'No user data found');
     }
 
-    const nomName = data[0].nomInfo[0] !== undefined ? data[0].nomInfo[0].display : null;
+    const info = data[0].nomInfo[0] !== undefined ? data[0].nomInfo[0] : null;
     const totalRewards =
       data[0].validatorsInfo.reduce((a, b) => a + b.estimatedReward, 0) / Math.pow(10, networkDetails.decimalPlaces);
     const totalAmountStaked =
       data[0].validatorsInfo.filter((x) => x.isElected).reduce((a, b) => a + b.nomStake, 0) /
       Math.pow(10, networkDetails.decimalPlaces);
     const validatorsInfo = data[0].validatorsInfo.map((x) => {
-      const name = data[0].info.filter((valId) => valId.stashId == x.stashId);
+      const info = data[0].info.filter((valId) => valId.stashId == x.stashId);
       return {
         stashId: x.stashId,
         riskScore: x.riskScore,
@@ -66,13 +66,13 @@ const userData = async (req, res, next) => {
         commission: x.commission / Math.pow(10, 7),
         nomStake: x.nomStake / Math.pow(10, networkDetails.decimalPlaces),
         claimedRewardEras: x.claimedRewards,
-        name: name[0] !== undefined ? name[0].display : null,
+        info: isNil(info[0]) ? null : info[0],
       };
     });
 
     const result = {
       nomId: data[0].nomId,
-      name: nomName,
+      info: info,
       stats: {
         totalAmountStaked: totalAmountStaked,
         estimatedRewards: totalRewards,

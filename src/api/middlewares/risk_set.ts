@@ -51,7 +51,7 @@ const risk_set = async (req, res, next) => {
       x.ownStake = x.ownStake / Math.pow(10, networkDetails.decimalPlaces);
       x.othersStake = x.totalStake - x.ownStake;
       x.estimatedPoolReward = x.estimatedPoolReward / Math.pow(10, networkDetails.decimalPlaces);
-      x.name = x.info[0] !== undefined ? x.info[0].display : null;
+      x.info = isNil(x.info[0]) ? null : x.info[0];
     });
 
     const arr1 = sortedData.map(
@@ -64,7 +64,7 @@ const risk_set = async (req, res, next) => {
         rewardsPer100KSM,
         riskScore,
         oversubscribed,
-        name,
+        info,
         ownStake,
         othersStake,
       }) => ({
@@ -76,7 +76,7 @@ const risk_set = async (req, res, next) => {
         rewardsPer100KSM,
         riskScore,
         oversubscribed,
-        name,
+        info,
         ownStake,
         othersStake,
       }),

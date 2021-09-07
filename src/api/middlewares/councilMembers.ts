@@ -44,7 +44,7 @@ const councilMembers = async (req, res, next) => {
       .map((x) => {
         const totalBalance = x.totalBalance / Math.pow(10, networkDetails.decimalPlaces);
         const backing = x.stake / Math.pow(10, networkDetails.decimalPlaces);
-        const name = x.memberIdentity[0] !== undefined ? x.memberIdentity[0].display : null;
+        const info = x.memberIdentity[0] !== undefined ? x.memberIdentity[0] : null;
         const numberOfBackers = x.backersInfo.length;
         //   const backersInfo = x.backersInfo.map((y) => {
         //     const stake = y.stake / Math.pow(10, 12);
@@ -56,7 +56,7 @@ const councilMembers = async (req, res, next) => {
         //     };
         //   });
         return {
-          name: name,
+          info: info,
           accountId: x.accountId,
           backing: backing,
           totalBalance: totalBalance,
@@ -69,7 +69,7 @@ const councilMembers = async (req, res, next) => {
       .map((x) => {
         const totalBalance = x.totalBalance / Math.pow(10, networkDetails.decimalPlaces);
         const backing = x.stake / Math.pow(10, networkDetails.decimalPlaces);
-        const name = x.memberIdentity[0] !== undefined ? x.memberIdentity[0].display : null;
+        const info = x.memberIdentity[0] !== undefined ? x.memberIdentity[0] : null;
         const numberOfBackers = x.backersInfo.length;
         //   const backersInfo = x.backersInfo.map((y) => {
         //     const stake = y.stake / Math.pow(10, 12);
@@ -81,7 +81,7 @@ const councilMembers = async (req, res, next) => {
         //     };
         //   });
         return {
-          name: name,
+          info: info,
           accountId: x.accountId,
           backing: backing,
           totalBalance: totalBalance,

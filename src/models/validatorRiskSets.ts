@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import AccountIdentity from './accountIdentity';
 const ValidatorRiskSets = new mongoose.Schema(
   {
     lowriskset: [
@@ -11,7 +12,7 @@ const ValidatorRiskSets = new mongoose.Schema(
         rewardsPer100KSM: Number,
         riskScore: Number,
         oversubscribed: Boolean,
-        name: String,
+        info: AccountIdentity,
         ownStake: Number,
         othersStake: Number,
       },
@@ -26,7 +27,7 @@ const ValidatorRiskSets = new mongoose.Schema(
         rewardsPer100KSM: Number,
         riskScore: Number,
         oversubscribed: Boolean,
-        name: String,
+        info: AccountIdentity,
         ownStake: Number,
         othersStake: Number,
       },
@@ -41,7 +42,7 @@ const ValidatorRiskSets = new mongoose.Schema(
         rewardsPer100KSM: Number,
         riskScore: Number,
         oversubscribed: Boolean,
-        name: String,
+        info: AccountIdentity,
         ownStake: Number,
         othersStake: Number,
       },
