@@ -63,7 +63,7 @@ const councilMember = async (req, res, next) => {
         return {
           stake: stake,
           backer: y.backer,
-          name: backerName[0] !== undefined ? backerName[0].display : null,
+          info: backerName[0] !== undefined ? backerName[0] : null,
         };
       });
 
@@ -84,19 +84,7 @@ const councilMember = async (req, res, next) => {
             })
           : [{}];
 
-      const socialInfo =
-        data[0].memberIdentity[0] !== undefined
-          ? data[0].memberIdentity.map((x) => {
-              return {
-                name: x.display,
-                email: x.email,
-                legal: x.legal,
-                riot: x.riot,
-                twitter: x.twitter,
-                web: x.web,
-              };
-            })
-          : [{}];
+      const socialInfo = data[0].memberIdentity[0] !== undefined ? data[0].memberIdentity[0] : [{}];
 
       const transparencyScores =
         data[0].memberIdentity[0] !== undefined

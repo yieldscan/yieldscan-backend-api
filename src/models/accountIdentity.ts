@@ -4,6 +4,8 @@ const AccountIdentity = new mongoose.Schema(
     accountId: String,
     stashId: String,
     display: String,
+    displayParent: String,
+    parent: String,
     email: String,
     eraIndex: Number,
     legal: String,

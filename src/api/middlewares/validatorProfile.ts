@@ -34,14 +34,6 @@ const validatorProfile = async (req, res, next) => {
       },
       {
         $lookup: {
-          from: networkDetails.name + 'accountidentities',
-          localField: 'nominators.nomId',
-          foreignField: 'stashId',
-          as: 'nomInfo',
-        },
-      },
-      {
-        $lookup: {
           from: networkDetails.name + 'validatoridentities',
           localField: 'stashId',
           foreignField: 'stashId',
@@ -62,14 +54,12 @@ const validatorProfile = async (req, res, next) => {
       x.othersStake = x.totalStake - x.ownStake;
       x.numOfNominators = x.nominators.length;
       x.estimatedPoolReward = x.estimatedPoolReward / Math.pow(10, networkDetails.decimalPlaces);
-      x.name = x.info[0] !== undefined ? x.info[0].display : null;
     });
 
     const stakingInfo = data.map((x) => {
       const nominatorsInfo = x.nominators.map((y) => {
         y.stake = x.isElected ? y.stake / Math.pow(10, networkDetails.decimalPlaces) : null;
-        const name = x.nomInfo.filter((z) => y.nomId == z.stashId);
-        return { nomId: y.nomId, stake: y.stake, name: name[0] !== undefined ? name[0].display : null };
+        return { nomId: y.nomId, stake: y.stake };
       });
       return {
         ownStake: x.ownStake,
@@ -103,20 +93,6 @@ const validatorProfile = async (req, res, next) => {
         riskScore,
       }),
     );
-
-    const socialInfo =
-      data[0].info[0] !== undefined
-        ? data[0].info.map((x) => {
-            return {
-              name: x.display,
-              email: x.email,
-              legal: x.legal,
-              riot: x.riot,
-              twitter: x.twitter,
-              web: x.web,
-            };
-          })
-        : [{}];
 
     const transparencyScores =
       data[0].info[0] !== undefined
@@ -159,13 +135,13 @@ const validatorProfile = async (req, res, next) => {
           })
         : [{}];
 
-    const linkedValidators = await getLinkedValidators(networkDetails.name, socialInfo[0], keyStats[0].stashId);
+    const linkedValidators = await getLinkedValidators(networkDetails.name, data[0]?.info[0], keyStats[0].stashId);
 
     return res
       .json({
         keyStats: keyStats[0],
         stakingInfo: stakingInfo[0],
-        socialInfo: socialInfo[0],
+        socialInfo: data[0]?.info[0],
         additionalInfo: additionalInfo[0],
         linkedValidators: linkedValidators,
         transparencyScores: transparencyScores[0],

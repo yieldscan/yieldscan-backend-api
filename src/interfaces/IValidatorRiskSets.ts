@@ -1,3 +1,5 @@
+import { IAccountIdentity } from './IAccountIdentity';
+
 export interface IValidatorRiskSets {
   lowriskset: Array<{
     stashId: string;
@@ -8,7 +10,7 @@ export interface IValidatorRiskSets {
     rewardsPer100KSM: number;
     riskScore: number;
     oversubscribed: boolean;
-    name: string;
+    info: IAccountIdentity;
     ownStake: number;
     othersStake: number;
   }>;
@@ -21,7 +23,7 @@ export interface IValidatorRiskSets {
     rewardsPer100KSM: number;
     riskScore: number;
     oversubscribed: boolean;
-    name: string;
+    info: IAccountIdentity;
     ownStake: number;
     othersStake: number;
   }>;
@@ -34,7 +36,7 @@ export interface IValidatorRiskSets {
     rewardsPer100KSM: number;
     riskScore: number;
     oversubscribed: boolean;
-    name: string;
+    info: IAccountIdentity;
     ownStake: number;
     othersStake: number;
   }>;
