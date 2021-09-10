@@ -22,21 +22,13 @@ const nominatorsDashboard = async (req, res, next) => {
           'validatorsInfo.isElected': true,
         },
       },
-      // removed/commented lookup for accountIdentity because it was reducing performance for
-      // fetching all the nominators identity at once
-      // Todo: add pagination for better performance with identity.
-      // {
-      //   $lookup: {
-      //     from: networkDetails.name + 'accountidentities',
-      //     localField: 'nomId',
-      //     foreignField: 'accountId',
-      //     as: 'info',
-      //   },
-      // },
       {
         $sort: {
           dailyEarnings: -1,
         },
+      },
+      {
+        $limit: 500,
       },
     ]).allowDiskUse(true);
 
