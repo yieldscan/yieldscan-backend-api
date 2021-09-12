@@ -21,9 +21,12 @@ We are always working on improving our codebase, and welcome any suggestions or 
 Important packages:
 
 - [src/config](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/config): Here we define configurations for the application(supported networks, etc).
-- [src/models](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/models): Schema for the database.
-- [src/interfaces](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/interfaces): Interfaces for the models.
+
 - [src/api](https://github.com/yieldscan/yieldscan-backend-api/tree/master/src/api): Here we define different middlewares and routes for different endpoints.
+
+- submodules:
+  - [src/models](https://github.com/yieldscan/ys-models): Schema for the database.
+  - [src/interfaces](https://github.com/yieldscan/ys-interfaces): Interfaces for the models.
 
 Api Endpoints:
 
@@ -45,8 +48,10 @@ Api Endpoints:
 Clone this or forked repository:
 
 ```
-git clone https://github.com/yieldscan/yieldscan-backend-api
+git clone --recursive https://github.com/yieldscan/yieldscan-backend-api
 ```
+
+Note: `--recursive` is for cloning the submodules. If you already have cloned the repository without the `--recursive` argument and now want to load it’s submodules you have to run `git submodule update --init` inside the main folder of the repo.
 
 cd into the main folder:
 
