@@ -33,9 +33,7 @@ export default {
   /**
    * Used by winston logger
    */
-  domain: {
-    level: process.env.domain,
-  },
+  allowedDomains: ['https://yieldscan.app', 'https://dev.yieldscan.app'],
 
   /**
    * API configs
