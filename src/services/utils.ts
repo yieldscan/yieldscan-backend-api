@@ -50,14 +50,28 @@ export function getNetworkDetails(baseUrl: string): any {
   return network;
 }
 
-export function sortLowRisk(arr: Array<IStakingInfo>): Array<IStakingInfo> {
-  const lowestRiskset = arr.filter((x) => x.riskScore < 0.3 && x.commission !== 100 && !x.oversubscribed && !x.blocked);
+export function sortLowRisk(arr: Array<IStakingInfo>, minRewardPerDay: number): Array<IStakingInfo> {
+  const lowestRiskset = arr.filter(
+    (x) =>
+      x.riskScore < 0.3 &&
+      x.commission !== 100 &&
+      !x.oversubscribed &&
+      !x.blocked &&
+      x.rewardsPer100KSM > minRewardPerDay,
+  );
 
   return lowestRiskset;
 }
 
-export function sortMedRisk(arr: Array<IStakingInfo>): Array<IStakingInfo> {
-  const medRiskSet = arr.filter((x) => x.riskScore < 0.5 && x.commission !== 100 && !x.oversubscribed && !x.blocked);
+export function sortMedRisk(arr: Array<IStakingInfo>, minRewardPerDay: number): Array<IStakingInfo> {
+  const medRiskSet = arr.filter(
+    (x) =>
+      x.riskScore < 0.5 &&
+      x.commission !== 100 &&
+      !x.oversubscribed &&
+      !x.blocked &&
+      x.rewardsPer100KSM > minRewardPerDay,
+  );
 
   // Uncomment below if you want to include include suggestions from other risk-sets
 
@@ -67,8 +81,10 @@ export function sortMedRisk(arr: Array<IStakingInfo>): Array<IStakingInfo> {
   return medRiskSet;
 }
 
-export function sortHighRisk(arr: Array<IStakingInfo>): Array<IStakingInfo> {
-  const highRiskSet = arr.filter((x) => x.commission !== 100 && !x.oversubscribed && !x.blocked);
+export function sortHighRisk(arr: Array<IStakingInfo>, minRewardPerDay: number): Array<IStakingInfo> {
+  const highRiskSet = arr.filter(
+    (x) => x.commission !== 100 && !x.oversubscribed && !x.blocked && x.rewardsPer100KSM > minRewardPerDay,
+  );
 
   return highRiskSet;
 }
