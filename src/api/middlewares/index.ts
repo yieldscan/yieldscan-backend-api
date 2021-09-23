@@ -22,6 +22,7 @@ import nominatorOverallHistory from './nominatorOverallHistory';
 import eraStakingData from './eraStakingData';
 import lastEraIndex from './lastEraIndex';
 import updateFeesPaidStatus from './updateFeesPaidStatus';
+import existingUserCheck from './existingUserCheck';
 
 export default {
   risk_set_only,
@@ -48,4 +49,5 @@ export default {
   eraStakingData,
   lastEraIndex,
   updateFeesPaidStatus,
+  existingUserCheck,
 };

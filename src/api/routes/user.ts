@@ -22,6 +22,7 @@ export default (app: Router): void => {
   app.use('/:network/user', route);
 
   route.get('/:id', middlewares.userData);
+  route.get('/existing-user/:id', middlewares.existingUserCheck);
   route.put(
     '/transaction/update',
     cors(corsOptions),
