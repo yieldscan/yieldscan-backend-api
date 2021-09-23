@@ -23,6 +23,7 @@ export default (app: Router): void => {
 
   route.get('/:id', middlewares.userData);
   route.get('/existing-user/:id', middlewares.existingUserCheck);
+  route.get('/fees-sub-status/:id', middlewares.feesSubscriptionStatus);
   route.put(
     '/transaction/update',
     cors(corsOptions),

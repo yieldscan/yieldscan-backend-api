@@ -23,6 +23,7 @@ import eraStakingData from './eraStakingData';
 import lastEraIndex from './lastEraIndex';
 import updateFeesPaidStatus from './updateFeesPaidStatus';
 import existingUserCheck from './existingUserCheck';
+import feesSubscriptionStatus from './feesSubscriptionStatus';
 
 export default {
   risk_set_only,
@@ -50,4 +51,5 @@ export default {
   lastEraIndex,
   updateFeesPaidStatus,
   existingUserCheck,
+  feesSubscriptionStatus,
 };
