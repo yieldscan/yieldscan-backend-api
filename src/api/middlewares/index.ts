@@ -21,6 +21,7 @@ import nominatorHistory from './nominatorHistory';
 import nominatorOverallHistory from './nominatorOverallHistory';
 import eraStakingData from './eraStakingData';
 import lastEraIndex from './lastEraIndex';
+import updateFeesPaidStatus from './updateFeesPaidStatus';
 
 export default {
   risk_set_only,
@@ -46,4 +47,5 @@ export default {
   nominatorOverallHistory,
   eraStakingData,
   lastEraIndex,
+  updateFeesPaidStatus,
 };

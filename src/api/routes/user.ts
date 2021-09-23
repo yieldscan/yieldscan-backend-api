@@ -46,4 +46,16 @@ export default (app: Router): void => {
     }),
     middlewares.updateTransactionData,
   );
+  route.put(
+    '/transaction/update-fees-status',
+    cors(corsOptions),
+    celebrate({
+      body: Joi.object({
+        network: Joi.string(),
+        ysFeesPaid: Joi.boolean(),
+        transactionHash: Joi.string(),
+      }),
+    }),
+    middlewares.updateFeesPaidStatus,
+  );
 };
