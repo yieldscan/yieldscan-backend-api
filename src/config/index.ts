@@ -33,12 +33,7 @@ export default {
   /**
    * Used by winston logger
    */
-  allowedDomains: [
-    'https://yieldscan.app',
-    'https://dev.yieldscan.app',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-  ],
+  allowedDomains: ['https://yieldscan.app', 'https://dev.yieldscan.app'],
 
   /**
    * API configs
