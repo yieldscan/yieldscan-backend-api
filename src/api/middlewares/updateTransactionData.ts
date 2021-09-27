@@ -52,7 +52,7 @@ const updateTransactionData = async (req, res, next) => {
 
     return res.status(200).json({ status: 200, message: 'transaction info updated' });
   } catch (e) {
-    Logger.error('🔥 Error while saving trnasaction data: %o', e);
+    Logger.error('🔥 Error while saving transaction data: %o', e);
     return next(e);
   }
 };

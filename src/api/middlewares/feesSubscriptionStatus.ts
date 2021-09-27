@@ -17,6 +17,12 @@ const feesSubscriptionStatus = async (req, res, next) => {
     const TransactionData = Container.get(networkDetails.name + 'TransactionData') as mongoose.Model<
       ITransactionData & mongoose.Document
     >;
+    const currentDate = new Date(new Date().setHours(0, 0, 0));
+    const lastAllowablePaymentDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() - 27,
+    );
 
     const sortedData = await TransactionData.aggregate([
       // { $unwind: '$nominatorsInfo' },
@@ -25,7 +31,9 @@ const feesSubscriptionStatus = async (req, res, next) => {
           $and: [
             { stashId: stashId },
             { successful: true },
-            { createdAt: { $gt: new Date(new Date('2019-10-04').setHours(23, 59, 59)) } },
+            { createdAt: { $gt: lastAllowablePaymentDate } },
+            { ysFeesPaid: true },
+            { transactionType: { $regex: 'nominate', $options: 'i' } },
           ],
         },
       },
@@ -39,12 +47,12 @@ const feesSubscriptionStatus = async (req, res, next) => {
       },
     ]);
 
-    const result = { isFirstTime: true, lastTransactionInfo: null };
+    const result = { subscriptionActive: false, lastTransactionInfo: null };
 
     if (sortedData.length == 0) {
       Logger.error('🔥 No Data found: %o');
     } else {
-      result.isFirstTime = false;
+      result.subscriptionActive = true;
       result.lastTransactionInfo = sortedData[0];
     }
 
