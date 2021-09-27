@@ -53,9 +53,12 @@ export default (app: Router): void => {
     cors(corsOptions),
     celebrate({
       body: Joi.object({
-        network: Joi.string(),
-        ysFeesPaid: Joi.boolean(),
         transactionHash: Joi.string(),
+        network: Joi.string(),
+        ysFees: Joi.number(),
+        ysFeesAddress: Joi.string(),
+        ysFeesRatio: Joi.number(),
+        ysFeesPaid: Joi.boolean(),
       }),
     }),
     middlewares.updateFeesPaidStatus,

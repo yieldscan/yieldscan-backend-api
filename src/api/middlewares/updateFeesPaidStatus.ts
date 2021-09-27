@@ -6,7 +6,7 @@ const updateFeesPaidStatus = async (req, res, next) => {
   const Logger = Container.get('logger');
   try {
     const data = req.body;
-    const { ysFeesPaid, network, transactionHash } = data;
+    const { ysFees, ysFeesAddress, ysFeesRatio, ysFeesPaid, network, transactionHash } = data;
 
     const TransactionData = Container.get(network + 'TransactionData') as mongoose.Model<
       ITransactionData & mongoose.Document
@@ -15,6 +15,9 @@ const updateFeesPaidStatus = async (req, res, next) => {
     await TransactionData.findOneAndUpdate(
       { transactionHash: transactionHash },
       {
+        ysFees: ysFees,
+        ysFeesAddress: ysFeesAddress,
+        ysFeesRatio: ysFeesRatio,
         ysFeesPaid: ysFeesPaid,
       },
       { upsert: false, useFindAndModify: false },
