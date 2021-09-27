@@ -17,11 +17,9 @@ const feesSubscriptionStatus = async (req, res, next) => {
     const TransactionData = Container.get(networkDetails.name + 'TransactionData') as mongoose.Model<
       ITransactionData & mongoose.Document
     >;
-    const currentDate = new Date(new Date().setHours(0, 0, 0));
+    const currentDate = new Date();
     const lastAllowablePaymentDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate() - 27,
+      new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 27).setHours(0, 0, 0),
     );
 
     const sortedData = await TransactionData.aggregate([
