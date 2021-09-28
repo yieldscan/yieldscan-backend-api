@@ -12,7 +12,7 @@ const updateFeesPaidStatus = async (req, res, next) => {
       ITransactionData & mongoose.Document
     >;
 
-    await TransactionData.findOneAndUpdate(
+    const transactionData = await TransactionData.findOneAndUpdate(
       { transactionHash: transactionHash },
       {
         ysFees: ysFees,
@@ -20,8 +20,11 @@ const updateFeesPaidStatus = async (req, res, next) => {
         ysFeesRatio: ysFeesRatio,
         ysFeesPaid: ysFeesPaid,
       },
-      { upsert: false, useFindAndModify: false },
+      { upsert: false, useFindAndModify: false, new: true },
     );
+
+    Logger.info('successfully updated transaction data');
+    Logger.info(JSON.stringify(transactionData, null, 2));
 
     return res.status(200).json({ status: 200, message: 'transaction info updated' });
   } catch (e) {

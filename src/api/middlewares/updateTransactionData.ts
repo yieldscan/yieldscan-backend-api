@@ -28,7 +28,7 @@ const updateTransactionData = async (req, res, next) => {
       ITransactionData & mongoose.Document
     >;
 
-    await TransactionData.findOneAndUpdate(
+    const transactionData = await TransactionData.findOneAndUpdate(
       { transactionHash: transactionHash },
       {
         stashId: stashId,
@@ -47,8 +47,11 @@ const updateTransactionData = async (req, res, next) => {
         transactionHash: transactionHash,
         successful: successful,
       },
-      { upsert: true, useFindAndModify: false },
+      { upsert: true, useFindAndModify: false, new: true },
     );
+
+    Logger.info('successfully added transaction data');
+    Logger.info(JSON.stringify(transactionData, null, 2));
 
     return res.status(200).json({ status: 200, message: 'transaction info updated' });
   } catch (e) {
