@@ -6,7 +6,16 @@ import config from '../../config';
 import middlewares from '../middlewares';
 const route = Router();
 
-const corsOptions = { origin: config.domain.level };
+const whitelist = config?.allowedDomains;
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 // cors(corsOptions) // add this after '/:id/update',
 
 export default (app: Router): void => {
