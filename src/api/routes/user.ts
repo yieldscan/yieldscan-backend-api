@@ -1,21 +1,20 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-// import cors from 'cors';
+import cors from 'cors';
 
-// import config from '../../config';
+import config from '../../config';
 import middlewares from '../middlewares';
 const route = Router();
-// TODO: add cors options(uncomment the following) before moving to production
-// const whitelist = config?.allowedDomains;
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
+const whitelist = config?.allowedDomains;
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 export default (app: Router): void => {
   // Register our endpoint for this route-apis
@@ -26,7 +25,7 @@ export default (app: Router): void => {
   route.get('/fees-sub-status/:id', middlewares.feesSubscriptionStatus);
   route.put(
     '/transaction/update',
-    // cors(corsOptions),
+    cors(corsOptions),
     celebrate({
       body: Joi.object({
         stashId: Joi.string(),
@@ -50,7 +49,7 @@ export default (app: Router): void => {
   );
   route.put(
     '/transaction/update-fees-status',
-    // cors(corsOptions),
+    cors(corsOptions),
     celebrate({
       body: Joi.object({
         transactionHash: Joi.string(),
