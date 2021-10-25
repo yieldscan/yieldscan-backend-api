@@ -54,7 +54,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "git-cz": "^4.7.0",
-    "jest": "^26.1.0",
+    "jest": "^27.3.1",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.1",
